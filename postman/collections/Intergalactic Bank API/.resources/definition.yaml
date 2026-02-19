@@ -1,0 +1,10 @@
+auth:
+  - credentials:
+      - key: value
+        value: "{{apiKey}}"
+      - key: key
+        value: x-api-key
+    id: ""
+    name: apikey auth
+    type: apikey
+name: Intergalactic Bank API
