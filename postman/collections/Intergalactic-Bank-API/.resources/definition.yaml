@@ -1,15 +1,23 @@
 $kind: collection
 name: Intergalactic Bank API
-description: A banking API for the Intergalactic Bank. Supports account
-  management and transactions. Auth via `x-api-key` header.
+description: A banking API for the Intergalactic Bank. Supports account management and transactions. Auth via `x-api-key` header.
 auth:
   type: apikey
   credentials:
-    key: x-api-key
-    value: "{{apiKey}}"
-    in: header
+    - key: key
+      value: x-api-key
+    - key: value
+      value: '{{apiKey}}'
+    - key: in
+      value: header
 variables:
-  baseUrl: https://template.postman-echo.com
-  apiKey: "1234"
-  accountId: "1"
-  transactionId: "1"
+  - key: baseUrl
+    value: 'http://localhost:3000'
+  - key: apiKey
+    value: ''
+  - key: accountId
+    value: ''
+  - key: accountId2
+    value: ''
+  - key: transactionId
+    value: ''

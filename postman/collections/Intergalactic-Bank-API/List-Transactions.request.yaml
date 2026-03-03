@@ -2,7 +2,7 @@ $kind: http-request
 name: List Transactions
 method: GET
 url: '{{baseUrl}}/api/v1/transactions'
-order: 1000
+order: 9000
 queryParams:
   - key: fromAccountId
     value: ''
@@ -12,5 +12,4 @@ queryParams:
     disabled: true
   - key: createdAt
     value: ''
-    description: 'Exact date match (YYYY-MM-DD)'
     disabled: true

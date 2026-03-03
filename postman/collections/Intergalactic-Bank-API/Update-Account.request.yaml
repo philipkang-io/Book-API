@@ -2,7 +2,7 @@ $kind: http-request
 name: Update Account
 method: PUT
 url: '{{baseUrl}}/api/v1/accounts/{{accountId}}'
-order: 4000
+order: 8000
 headers:
   - key: Content-Type
     value: application/json
@@ -10,7 +10,6 @@ body:
   type: json
   content: |-
     {
-      "owner": "Updated Name",
-      "accountType": "PREMIUM",
-      "currency": "COSMIC_COINS"
+      "owner": "Nova Newman Updated",
+      "accountType": "PREMIUM"
     }

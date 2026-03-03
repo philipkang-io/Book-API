@@ -1,0 +1,24 @@
+$kind: http-request
+name: Create Transaction
+method: POST
+url: '{{baseUrl}}/api/v1/transactions'
+order: 10000
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "fromAccountId": "{{accountId}}",
+      "toAccountId": "{{accountId2}}",
+      "amount": 100,
+      "currency": "COSMIC_COINS"
+    }
+scripts:
+  - type: http:afterResponse
+    language: text/javascript
+    code: |-
+      const jsonData = pm.response.json();
+      pm.collectionVariables.set("transactionId", jsonData.transaction.transactionId);
+      console.log("Transaction ID saved:", jsonData.transaction.transactionId);

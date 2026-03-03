@@ -1,0 +1,14 @@
+$kind: http-request
+name: Generate API Key
+method: GET
+url: '{{baseUrl}}/api/v1/auth'
+order: 3000
+auth:
+  type: noauth
+scripts:
+  - type: http:afterResponse
+    language: text/javascript
+    code: |-
+      const jsonData = pm.response.json();
+      pm.collectionVariables.set("apiKey", jsonData.apiKey);
+      console.log("API Key saved:", jsonData.apiKey);

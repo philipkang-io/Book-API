@@ -1,0 +1,24 @@
+$kind: http-request
+name: Create Account
+method: POST
+url: '{{baseUrl}}/api/v1/accounts'
+order: 5000
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "owner": "Nova Newman",
+      "currency": "COSMIC_COINS",
+      "balance": 1000,
+      "accountType": "STANDARD"
+    }
+scripts:
+  - type: http:afterResponse
+    language: text/javascript
+    code: |-
+      const jsonData = pm.response.json();
+      pm.collectionVariables.set("accountId", jsonData.account.accountId);
+      console.log("Account ID saved:", jsonData.account.accountId);

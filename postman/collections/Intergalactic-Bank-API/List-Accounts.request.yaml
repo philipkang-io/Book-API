@@ -2,13 +2,11 @@ $kind: http-request
 name: List Accounts
 method: GET
 url: '{{baseUrl}}/api/v1/accounts'
-order: 1000
+order: 4000
 queryParams:
   - key: owner
     value: ''
-    description: Partial match filter on owner name
     disabled: true
   - key: createdAt
     value: ''
-    description: 'Exact date match (YYYY-MM-DD)'
     disabled: true

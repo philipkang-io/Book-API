@@ -1,0 +1,5 @@
+$kind: http-request
+name: Delete Account 2
+method: DELETE
+url: '{{baseUrl}}/api/v1/accounts/{{accountId2}}'
+order: 13000
