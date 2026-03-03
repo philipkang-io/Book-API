@@ -1,0 +1,7 @@
+$kind: http-request
+name: Welcome
+method: GET
+url: '{{baseUrl}}/'
+order: 1000
+auth:
+  type: noauth

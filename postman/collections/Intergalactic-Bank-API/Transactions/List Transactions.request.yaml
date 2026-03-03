@@ -1,0 +1,16 @@
+$kind: http-request
+name: List Transactions
+method: GET
+url: '{{baseUrl}}/api/v1/transactions'
+order: 1000
+queryParams:
+  - key: fromAccountId
+    value: ''
+    disabled: true
+  - key: toAccountId
+    value: ''
+    disabled: true
+  - key: createdAt
+    value: ''
+    description: 'Exact date match (YYYY-MM-DD)'
+    disabled: true

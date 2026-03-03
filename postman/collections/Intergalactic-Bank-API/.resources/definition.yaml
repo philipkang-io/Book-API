@@ -1,0 +1,21 @@
+$kind: collection
+name: Intergalactic Bank API
+description: "A banking API for the Intergalactic Bank. Supports account management and transactions. Auth via `x-api-key` header."
+auth:
+  type: apikey
+  credentials:
+    - key: key
+      value: x-api-key
+    - key: value
+      value: '{{apiKey}}'
+    - key: in
+      value: header
+variables:
+  - key: baseUrl
+    value: 'http://localhost:3000'
+  - key: apiKey
+    value: '1234'
+  - key: accountId
+    value: '1'
+  - key: transactionId
+    value: '1'

@@ -13,20 +13,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-          cache: "yarn"
-
       - run: curl -o- "https://dl-cli.pstmn.io/install/unix.sh" | sh
 
-      - name: Validate and sync
+      - name: Validate Collection and Spec
         env:
           POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
         run: |
           postman login --with-api-key "$POSTMAN_API_KEY"
-          yarn install --frozen-lockfile
-          yarn start &
-          sleep 3
-          yarn test:api
+          postman collection run /path/to/collection.json
+          postman workspace prepare
           postman workspace push -y
