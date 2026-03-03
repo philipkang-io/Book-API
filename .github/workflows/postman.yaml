@@ -20,6 +20,6 @@ jobs:
           POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
         run: |
           postman login --with-api-key "$POSTMAN_API_KEY"
-          postman collection run /path/to/collection.json
+          postman collection run ./postman/collections/Intergalactic-Bank-API
           postman workspace prepare
           postman workspace push -y
