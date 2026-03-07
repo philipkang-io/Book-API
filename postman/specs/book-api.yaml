@@ -24,14 +24,13 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                    example: ok
-                  timestamp:
-                    type: string
-                    format: date-time
+                $ref: "#/components/schemas/HealthResponse"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
 
   /api/v1/books:
     get:
@@ -45,12 +44,13 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  books:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Book"
+                $ref: "#/components/schemas/BookListResponse"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
 
     post:
       summary: Create a book
@@ -69,12 +69,15 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  book:
-                    $ref: "#/components/schemas/Book"
+                $ref: "#/components/schemas/BookResponse"
         "400":
           description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
           content:
             application/json:
               schema:
@@ -82,12 +85,7 @@ paths:
 
   /api/v1/books/{id}:
     parameters:
-      - name: id
-        in: path
-        required: true
-        schema:
-          type: string
-        description: Book ID
+      - $ref: "#/components/parameters/BookId"
 
     get:
       summary: Get a book by ID
@@ -100,12 +98,15 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  book:
-                    $ref: "#/components/schemas/Book"
+                $ref: "#/components/schemas/BookResponse"
         "404":
           description: Book not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
           content:
             application/json:
               schema:
@@ -128,10 +129,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  book:
-                    $ref: "#/components/schemas/Book"
+                $ref: "#/components/schemas/BookResponse"
         "400":
           description: Validation error
           content:
@@ -140,6 +138,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "404":
           description: Book not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
           content:
             application/json:
               schema:
@@ -156,22 +160,35 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: Book deleted
-                  id:
-                    type: string
+                $ref: "#/components/schemas/DeleteResponse"
         "404":
           description: Book not found
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
 
 components:
+  parameters:
+    BookId:
+      name: id
+      in: path
+      required: true
+      description: Book ID
+      schema:
+        $ref: "#/components/schemas/ResourceId"
+
   schemas:
+    ResourceId:
+      type: string
+      example: "1"
+
     Book:
       type: object
       required:
@@ -180,8 +197,7 @@ components:
         - author
       properties:
         id:
-          type: string
-          example: "1"
+          $ref: "#/components/schemas/ResourceId"
         title:
           type: string
           example: The Great Gatsby
@@ -208,6 +224,39 @@ components:
         year:
           type: integer
           example: 1965
+
+    BookResponse:
+      type: object
+      properties:
+        book:
+          $ref: "#/components/schemas/Book"
+
+    BookListResponse:
+      type: object
+      properties:
+        books:
+          type: array
+          items:
+            $ref: "#/components/schemas/Book"
+
+    DeleteResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Book deleted
+        id:
+          $ref: "#/components/schemas/ResourceId"
+
+    HealthResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: ok
+        timestamp:
+          type: string
+          format: date-time
 
     Error:
       type: object
