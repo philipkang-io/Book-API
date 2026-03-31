@@ -45,12 +45,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BookListResponse"
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
+
 
     post:
       summary: Create a book
@@ -208,7 +203,9 @@ components:
           type: integer
           nullable: true
           example: 1925
-
+        isbn:
+          type: string
+          example: "978-0743274565"    
     BookInput:
       type: object
       required:
@@ -224,6 +221,9 @@ components:
         year:
           type: integer
           example: 1965
+        isbn:
+          type: string
+          example: "978-0596517748"    
 
     BookResponse:
       type: object
