@@ -1,0 +1,6 @@
+$schema: 'https://schema.postman.com/collection/v3'
+$kind: collection
+info:
+  name: 'Book API'
+  id: 'Be11Defc2abFb0ad7e62D8e3'
+  description: 'Simple REST API for managing books. CRUD operations, no authentication required.'

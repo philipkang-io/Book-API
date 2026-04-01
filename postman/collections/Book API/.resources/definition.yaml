@@ -1,4 +1,5 @@
 $kind: collection
-description: CRUD operations for the Book API. Includes tests for contract validation.
+description: Simple REST API for managing books. CRUD operations, no
+  authentication required.
 variables:
-  baseUrl: http://localhost:3000
+  bookId: ""

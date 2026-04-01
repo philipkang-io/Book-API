@@ -1,0 +1,376 @@
+{
+  "info": {
+    "_postman_id": "ca0964b3-ab1d-4f3f-a257-7a4f57462031",
+    "name": "Book API",
+    "description": "Simple REST API for managing books. CRUD operations, no authentication required.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "bookId",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "System",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "health"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Response has status ok', function () {",
+                  "    const json = pm.response.json();",
+                  "    pm.expect(json.status).to.eql('ok');",
+                  "    pm.expect(json.timestamp).to.be.a('string');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "id": "1941522b-73d5-498b-89dd-da8799b139e3"
+        }
+      ],
+      "id": "5607bc8f-fe62-49ac-9a06-b40e1e82f6a0"
+    },
+    {
+      "name": "Books",
+      "item": [
+        {
+          "name": "List All Books",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/books",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "books"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Response contains books array', function () {",
+                  "    const json = pm.response.json();",
+                  "    pm.expect(json.books).to.be.an('array');",
+                  "    pm.expect(json.books.length).to.be.at.least(1);",
+                  "});",
+                  "",
+                  "pm.test('Each book has required fields', function () {",
+                  "    const json = pm.response.json();",
+                  "    json.books.forEach(function(book) {",
+                  "        pm.expect(book).to.have.property('id');",
+                  "        pm.expect(book).to.have.property('title');",
+                  "        pm.expect(book).to.have.property('author');",
+                  "    });",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "id": "dd85d484-779b-46b1-8784-608e4f3e9f96"
+        },
+        {
+          "name": "Create a Book",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Dune\",\n  \"author\": \"Frank Herbert\",\n  \"year\": 1965\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/books",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "books"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 201', function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "pm.test('Book is created with correct data', function () {",
+                  "    const json = pm.response.json();",
+                  "    pm.expect(json.book.title).to.eql('Dune');",
+                  "    pm.expect(json.book.author).to.eql('Frank Herbert');",
+                  "    pm.expect(json.book.year).to.eql(1965);",
+                  "    pm.expect(json.book.id).to.be.a('string');",
+                  "});",
+                  "",
+                  "pm.test('Save book ID for later', function () {",
+                  "    const json = pm.response.json();",
+                  "    pm.collectionVariables.set('bookId', json.book.id);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "id": "e4ff9b7d-7194-4a29-9732-79a354aa951c"
+        },
+        {
+          "name": "Get Book by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/books/{{bookId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "books",
+                "{{bookId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Returns the correct book', function () {",
+                  "    const json = pm.response.json();",
+                  "    const bookId = pm.collectionVariables.get('bookId');",
+                  "    pm.expect(json.book.id).to.eql(bookId);",
+                  "    pm.expect(json.book.title).to.eql('Dune');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "id": "185de7ad-c193-406d-ad2d-5111e6e54a3d"
+        },
+        {
+          "name": "Update a Book",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Dune Messiah\",\n  \"author\": \"Frank Herbert\",\n  \"year\": 1969\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/books/{{bookId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "books",
+                "{{bookId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Book is updated', function () {",
+                  "    const json = pm.response.json();",
+                  "    pm.expect(json.book.title).to.eql('Dune Messiah');",
+                  "    pm.expect(json.book.year).to.eql(1969);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "id": "687b5633-6373-4376-aea6-7805e2ff4cb8"
+        },
+        {
+          "name": "Delete a Book",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/books/{{bookId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "books",
+                "{{bookId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Delete confirmation', function () {",
+                  "    const json = pm.response.json();",
+                  "    pm.expect(json.message).to.eql('Book deleted');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "id": "c68bf16e-a763-44c7-88e0-a762a4af51ac"
+        },
+        {
+          "name": "Get Deleted Book (404)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/books/{{bookId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "books",
+                "{{bookId}}"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 404', function () {",
+                  "    pm.response.to.have.status(404);",
+                  "});",
+                  "",
+                  "pm.test('Error response format', function () {",
+                  "    const json = pm.response.json();",
+                  "    pm.expect(json.error.name).to.eql('notFound');",
+                  "    pm.expect(json.error.message).to.eql('Book not found');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "id": "28448349-82ab-4421-94ba-2460517229bf"
+        },
+        {
+          "name": "Create Book - Validation Error",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"\",\n  \"author\": \"\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/books",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "books"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status code is 400', function () {",
+                  "    pm.response.to.have.status(400);",
+                  "});",
+                  "",
+                  "pm.test('Returns validation error', function () {",
+                  "    const json = pm.response.json();",
+                  "    pm.expect(json.error.name).to.eql('validationError');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "id": "ebc95262-9d5f-42d9-afca-1a3830a4b72d"
+        }
+      ],
+      "id": "53fab570-e9ba-4db8-ba50-8cc9ced3b5ef"
+    }
+  ]
+}

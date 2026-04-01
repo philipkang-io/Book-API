@@ -4,12 +4,14 @@
   },
   "entities": {
     "collections": [
-      { "id": "Be11Defc2abFb0ad7e62D8e3" }
+      "../postman/collections/book-api.collection.json"
     ],
     "environments": [],
     "flows": [],
     "globals": [],
     "mocks": [],
-    "specs": []
+    "specs": [
+      "postman/specs/book-api.yaml"
+    ]
   }
 }
