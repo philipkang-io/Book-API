@@ -51,7 +51,12 @@ paths:
                     title: Dune
                     author: Frank Herbert
                     year: 1965
-        
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
 
     post:
       summary: Create a book
