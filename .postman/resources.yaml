@@ -3,10 +3,12 @@ workspace:
 
 localResources:
   specs:
-    - postman/specs/book-api.yaml
+    - ../postman/specs/book-api.yaml
 
 # Each entry here maps a local resource to one or more corresponding objects in Postman Cloud
 
 cloudResources:
+  specs:
+    ../postman/specs/book-api.yaml: beb6f751-d064-4289-825a-dfbd473c55c3
   collections:
-    ../postman/collections/book-api.collection.json: ca0964b3-ab1d-4f3f-a257-7a4f57462031
+    ../postman/collections/Book API: 52509354-13bc9800-edb5-484b-a957-721a2f64fc4a

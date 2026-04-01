@@ -1,5 +1,7 @@
 $kind: collection
+name: Book API
 description: Simple REST API for managing books. CRUD operations, no
   authentication required.
 variables:
   bookId: ""
+  baseUrl: ""

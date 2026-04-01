@@ -1,8 +1,6 @@
 {
   "info": {
-    "_postman_id": "ca0964b3-ab1d-4f3f-a257-7a4f57462031",
     "name": "Book API",
-    "description": "Simple REST API for managing books. CRUD operations, no authentication required.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
@@ -16,19 +14,16 @@
       "name": "System",
       "item": [
         {
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567801",
           "name": "Health Check",
           "request": {
             "method": "GET",
-            "header": [],
             "url": {
               "raw": "{{baseUrl}}/health",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "health"
-              ]
-            }
+              "host": ["{{baseUrl}}"],
+              "path": ["health"]
+            },
+            "header": []
           },
           "event": [
             {
@@ -39,7 +34,6 @@
                   "pm.test('Status code is 200', function () {",
                   "    pm.response.to.have.status(200);",
                   "});",
-                  "",
                   "pm.test('Response has status ok', function () {",
                   "    const json = pm.response.json();",
                   "    pm.expect(json.status).to.eql('ok');",
@@ -48,31 +42,24 @@
                 ]
               }
             }
-          ],
-          "id": "1941522b-73d5-498b-89dd-da8799b139e3"
+          ]
         }
-      ],
-      "id": "5607bc8f-fe62-49ac-9a06-b40e1e82f6a0"
+      ]
     },
     {
       "name": "Books",
       "item": [
         {
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567802",
           "name": "List All Books",
           "request": {
             "method": "GET",
-            "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/v1/books",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "v1",
-                "books"
-              ]
-            }
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "books"]
+            },
+            "header": []
           },
           "event": [
             {
@@ -83,13 +70,11 @@
                   "pm.test('Status code is 200', function () {",
                   "    pm.response.to.have.status(200);",
                   "});",
-                  "",
                   "pm.test('Response contains books array', function () {",
                   "    const json = pm.response.json();",
                   "    pm.expect(json.books).to.be.an('array');",
                   "    pm.expect(json.books.length).to.be.at.least(1);",
                   "});",
-                  "",
                   "pm.test('Each book has required fields', function () {",
                   "    const json = pm.response.json();",
                   "    json.books.forEach(function(book) {",
@@ -101,13 +86,18 @@
                 ]
               }
             }
-          ],
-          "id": "dd85d484-779b-46b1-8784-608e4f3e9f96"
+          ]
         },
         {
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567803",
           "name": "Create a Book",
           "request": {
             "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/books",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "books"]
+            },
             "header": [
               {
                 "key": "Content-Type",
@@ -116,18 +106,12 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"title\": \"Dune\",\n  \"author\": \"Frank Herbert\",\n  \"year\": 1965\n}"
-            },
-            "url": {
-              "raw": "{{baseUrl}}/api/v1/books",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "v1",
-                "books"
-              ]
+              "raw": "{\n  \"title\": \"Dune\",\n  \"author\": \"Frank Herbert\",\n  \"year\": 1965\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
             }
           },
           "event": [
@@ -139,7 +123,6 @@
                   "pm.test('Status code is 201', function () {",
                   "    pm.response.to.have.status(201);",
                   "});",
-                  "",
                   "pm.test('Book is created with correct data', function () {",
                   "    const json = pm.response.json();",
                   "    pm.expect(json.book.title).to.eql('Dune');",
@@ -147,7 +130,6 @@
                   "    pm.expect(json.book.year).to.eql(1965);",
                   "    pm.expect(json.book.id).to.be.a('string');",
                   "});",
-                  "",
                   "pm.test('Save book ID for later', function () {",
                   "    const json = pm.response.json();",
                   "    pm.collectionVariables.set('bookId', json.book.id);",
@@ -155,26 +137,19 @@
                 ]
               }
             }
-          ],
-          "id": "e4ff9b7d-7194-4a29-9732-79a354aa951c"
+          ]
         },
         {
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567804",
           "name": "Get Book by ID",
           "request": {
             "method": "GET",
-            "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/v1/books/{{bookId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "v1",
-                "books",
-                "{{bookId}}"
-              ]
-            }
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "books", "{{bookId}}"]
+            },
+            "header": []
           },
           "event": [
             {
@@ -185,7 +160,6 @@
                   "pm.test('Status code is 200', function () {",
                   "    pm.response.to.have.status(200);",
                   "});",
-                  "",
                   "pm.test('Returns the correct book', function () {",
                   "    const json = pm.response.json();",
                   "    const bookId = pm.collectionVariables.get('bookId');",
@@ -195,13 +169,18 @@
                 ]
               }
             }
-          ],
-          "id": "185de7ad-c193-406d-ad2d-5111e6e54a3d"
+          ]
         },
         {
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567805",
           "name": "Update a Book",
           "request": {
             "method": "PUT",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/books/{{bookId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "books", "{{bookId}}"]
+            },
             "header": [
               {
                 "key": "Content-Type",
@@ -210,19 +189,12 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"title\": \"Dune Messiah\",\n  \"author\": \"Frank Herbert\",\n  \"year\": 1969\n}"
-            },
-            "url": {
-              "raw": "{{baseUrl}}/api/v1/books/{{bookId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "v1",
-                "books",
-                "{{bookId}}"
-              ]
+              "raw": "{\n  \"title\": \"Dune Messiah\",\n  \"author\": \"Frank Herbert\",\n  \"year\": 1969\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
             }
           },
           "event": [
@@ -234,7 +206,6 @@
                   "pm.test('Status code is 200', function () {",
                   "    pm.response.to.have.status(200);",
                   "});",
-                  "",
                   "pm.test('Book is updated', function () {",
                   "    const json = pm.response.json();",
                   "    pm.expect(json.book.title).to.eql('Dune Messiah');",
@@ -243,26 +214,19 @@
                 ]
               }
             }
-          ],
-          "id": "687b5633-6373-4376-aea6-7805e2ff4cb8"
+          ]
         },
         {
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567806",
           "name": "Delete a Book",
           "request": {
             "method": "DELETE",
-            "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/v1/books/{{bookId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "v1",
-                "books",
-                "{{bookId}}"
-              ]
-            }
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "books", "{{bookId}}"]
+            },
+            "header": []
           },
           "event": [
             {
@@ -273,7 +237,6 @@
                   "pm.test('Status code is 200', function () {",
                   "    pm.response.to.have.status(200);",
                   "});",
-                  "",
                   "pm.test('Delete confirmation', function () {",
                   "    const json = pm.response.json();",
                   "    pm.expect(json.message).to.eql('Book deleted');",
@@ -281,26 +244,19 @@
                 ]
               }
             }
-          ],
-          "id": "c68bf16e-a763-44c7-88e0-a762a4af51ac"
+          ]
         },
         {
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567807",
           "name": "Get Deleted Book (404)",
           "request": {
             "method": "GET",
-            "header": [],
             "url": {
               "raw": "{{baseUrl}}/api/v1/books/{{bookId}}",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "v1",
-                "books",
-                "{{bookId}}"
-              ]
-            }
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "books", "{{bookId}}"]
+            },
+            "header": []
           },
           "event": [
             {
@@ -311,7 +267,6 @@
                   "pm.test('Status code is 404', function () {",
                   "    pm.response.to.have.status(404);",
                   "});",
-                  "",
                   "pm.test('Error response format', function () {",
                   "    const json = pm.response.json();",
                   "    pm.expect(json.error.name).to.eql('notFound');",
@@ -320,13 +275,18 @@
                 ]
               }
             }
-          ],
-          "id": "28448349-82ab-4421-94ba-2460517229bf"
+          ]
         },
         {
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567808",
           "name": "Create Book - Validation Error",
           "request": {
             "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/books",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "books"]
+            },
             "header": [
               {
                 "key": "Content-Type",
@@ -335,18 +295,12 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"title\": \"\",\n  \"author\": \"\"\n}"
-            },
-            "url": {
-              "raw": "{{baseUrl}}/api/v1/books",
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "path": [
-                "api",
-                "v1",
-                "books"
-              ]
+              "raw": "{\n  \"title\": \"\",\n  \"author\": \"\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
             }
           },
           "event": [
@@ -358,7 +312,6 @@
                   "pm.test('Status code is 400', function () {",
                   "    pm.response.to.have.status(400);",
                   "});",
-                  "",
                   "pm.test('Returns validation error', function () {",
                   "    const json = pm.response.json();",
                   "    pm.expect(json.error.name).to.eql('validationError');",
@@ -366,11 +319,9 @@
                 ]
               }
             }
-          ],
-          "id": "ebc95262-9d5f-42d9-afca-1a3830a4b72d"
+          ]
         }
-      ],
-      "id": "53fab570-e9ba-4db8-ba50-8cc9ced3b5ef"
+      ]
     }
   ]
 }
