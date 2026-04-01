@@ -50,7 +50,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Err
+                $ref: "#/components/schemas/Error"
 
     post:
       summary: Create a book
