@@ -45,12 +45,13 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BookListResponse"
-        "500":
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
+              example:
+                books:
+                  - id: "1"
+                    title: Dune
+                    author: Frank Herbert
+                    year: 1965
+        
 
     post:
       summary: Create a book
@@ -63,6 +64,10 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/BookInput"
+            example:
+              title: Dune
+              author: Frank Herbert
+              year: 1965
       responses:
         "201":
           description: Book created successfully
@@ -70,6 +75,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BookResponse"
+              example:
+                book:
+                  id: "1"
+                  title: Dune
+                  author: Frank Herbert
+                  year: 1965
         "400":
           description: Validation error
           content:
@@ -99,6 +110,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BookResponse"
+              example:
+                book:
+                  id: "1"
+                  title: Dune
+                  author: Frank Herbert
+                  year: 1965
         "404":
           description: Book not found
           content:
@@ -123,6 +140,10 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/BookInput"
+            example:
+              title: Dune
+              author: Frank Herbert
+              year: 1965
       responses:
         "200":
           description: Book updated successfully
@@ -130,6 +151,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BookResponse"
+              example:
+                book:
+                  id: "1"
+                  title: Dune
+                  author: Frank Herbert
+                  year: 1965
         "400":
           description: Validation error
           content:
@@ -208,6 +235,7 @@ components:
           type: integer
           nullable: true
           example: 1925
+  
 
     BookInput:
       type: object
@@ -224,6 +252,7 @@ components:
         year:
           type: integer
           example: 1965
+  
 
     BookResponse:
       type: object
