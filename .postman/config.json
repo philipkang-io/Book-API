@@ -10,6 +10,8 @@
     "flows": [],
     "globals": [],
     "mocks": [],
-    "specs": []
+    "specs": [
+      "../openapi/book-api.yaml"
+    ]
   }
 }
