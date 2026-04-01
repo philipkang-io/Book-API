@@ -3,11 +3,13 @@
     "id": "e33c3260-d60a-41af-92df-eb8b0ee3f53c"
   },
   "entities": {
+    "collections": [
+      { "id": "Be11Defc2abFb0ad7e62D8e3" }
+    ],
     "environments": [],
     "flows": [],
     "globals": [],
     "mocks": [],
-    "specs": [],
-    "collections": []
+    "specs": []
   }
 }
