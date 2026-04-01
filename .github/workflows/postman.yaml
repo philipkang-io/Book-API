@@ -52,8 +52,6 @@ jobs:
 
   publish:
     name: Push to Postman Cloud
-    needs: validate
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
