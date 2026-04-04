@@ -49,7 +49,7 @@ paths:
           description: Internal server error   
           content:
             application/json:
-              schema:
+              schema: 
                 $ref: "#/components/schemas/Error"
 
     post:
