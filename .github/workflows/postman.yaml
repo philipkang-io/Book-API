@@ -50,21 +50,6 @@ jobs:
         if: always()
         run: pkill -f "node src/server.js" || true
 
-  publish:
-    name: Push to Postman Cloud
-    needs: validate
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
 
-      - name: Install Postman CLI
-        run: curl -o- "https://dl-cli.pstmn.io/install/unix.sh" | sh
 
-      - name: Login to Postman
-        env:
-          POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
-        run: postman login --with-api-key "$POSTMAN_API_KEY"
 
-      - name: Push to Cloud
-        run: postman workspace push --yes
