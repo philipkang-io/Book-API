@@ -1,0 +1,18 @@
+schemaVersion: "3.0"
+name: Create a book
+type: http
+url: http://{{baseUrl}}/api/v1/books
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: text
+  content: |-
+    {
+      "title": "Dune",
+      "author": "Frank Herbert",
+      "year": 1965
+    }
+order: 840
+examples: ./.resources/Create a book.resources/examples

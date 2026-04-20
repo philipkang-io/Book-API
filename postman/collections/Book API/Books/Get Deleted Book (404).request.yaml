@@ -1,4 +1,5 @@
-$kind: http-request
+schemaVersion: "3.0"
+type: http
 url: "{{baseUrl}}/api/v1/books/{{bookId}}"
 method: GET
 scripts:
@@ -7,7 +8,6 @@ scripts:
       pm.test('Status code is 404', function () {
           pm.response.to.have.status(404);
       });
-
       pm.test('Error response format', function () {
           const json = pm.response.json();
           pm.expect(json.error.name).to.eql('notFound');

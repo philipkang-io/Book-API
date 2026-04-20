@@ -1,4 +1,5 @@
-$kind: http-request
+schemaVersion: "3.0"
+type: http
 url: "{{baseUrl}}/api/v1/books"
 method: POST
 headers:
@@ -16,7 +17,6 @@ scripts:
       pm.test('Status code is 400', function () {
           pm.response.to.have.status(400);
       });
-
       pm.test('Returns validation error', function () {
           const json = pm.response.json();
           pm.expect(json.error.name).to.eql('validationError');

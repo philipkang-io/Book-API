@@ -1,0 +1,25 @@
+schemaVersion: "3.0"
+url: http://{{baseUrl}}/api/v1/books/:id
+method: DELETE
+headers:
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: "1"
+    description: Book ID
+body:
+  type: text
+  content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "message": "Book deleted",
+        "id": "1"
+      }
+order: 1000

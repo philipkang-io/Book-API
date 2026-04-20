@@ -1,5 +1,5 @@
 name: test
 values:
   - key: baseUrl
-    value: 'localhost:3000'
+    value: 'http://localhost:4500'
     enabled: true

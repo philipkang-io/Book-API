@@ -1,0 +1,17 @@
+schemaVersion: "3.0"
+name: Book details
+type: http
+url: http://{{baseUrl}}/api/v1/books/:id
+method: GET
+headers:
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: "4"
+    description: Book ID
+body:
+  type: text
+  content: ""
+auth:
+  type: noauth
+order: 90

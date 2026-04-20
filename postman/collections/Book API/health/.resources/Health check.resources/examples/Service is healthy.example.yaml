@@ -1,0 +1,21 @@
+schemaVersion: "3.0"
+url: http://{{baseUrl}}/health
+method: GET
+headers:
+  Accept: application/json
+body:
+  type: text
+  content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "status": "ok",
+        "timestamp": "2013-03-04T04:14:21.841Z"
+      }
+order: 1000

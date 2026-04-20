@@ -1,0 +1,33 @@
+schemaVersion: "3.0"
+url: http://{{baseUrl}}/api/v1/books/:id
+method: PUT
+headers:
+  Content-Type: application/json
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: "1"
+    description: Book ID
+body:
+  type: text
+  content: |-
+    {
+      "title": "Dune",
+      "author": "Frank Herbert",
+      "year": 1965
+    }
+response:
+  statusCode: 400
+  statusText: Bad Request
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "error": {
+          "name": "string",
+          "message": "string"
+        }
+      }
+order: 2000

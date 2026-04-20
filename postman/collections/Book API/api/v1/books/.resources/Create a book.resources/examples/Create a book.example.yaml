@@ -1,0 +1,19 @@
+schemaVersion: "3.0"
+name: Create a book
+url: http://{{baseUrl}}/api/v1/books
+method: POST
+body:
+  type: json
+  content: |-
+    {
+      "title": "Dune",
+      "author": "Frank Herbert",
+      "year": 1965
+    }
+response:
+  statusCode: 200
+  statusText: OK
+  body:
+    type: json
+    content: ""
+order: 1923337935651961

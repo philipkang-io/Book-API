@@ -1,0 +1,31 @@
+schemaVersion: "3.0"
+url: '{{baseUrl}}/api/v1/books'
+method: POST
+headers:
+  Content-Type: application/json
+  Accept: application/json
+body:
+  type: text
+  content: |-
+    {
+      "title": "Dune",
+      "author": "Frank Herbert",
+      "year": 1965
+    }
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "book": {
+          "id": "1",
+          "title": "The Great Gatsby",
+          "author": "F. Scott Fitzgerald",
+          "year": 1925
+        }
+      }
+order: 1000

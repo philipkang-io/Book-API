@@ -1,0 +1,33 @@
+schemaVersion: "3.0"
+url: http://{{baseUrl}}/api/v1/books
+method: GET
+headers:
+  Accept: application/json
+body:
+  type: text
+  content: ""
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    Content-Type: application/json
+  body:
+    type: json
+    content: |-
+      {
+        "books": [
+          {
+            "id": "1",
+            "title": "The Great Gatsby",
+            "author": "F. Scott Fitzgerald",
+            "year": 1925
+          },
+          {
+            "id": "1",
+            "title": "The Great Gatsby",
+            "author": "F. Scott Fitzgerald",
+            "year": 1925
+          }
+        ]
+      }
+order: 1000

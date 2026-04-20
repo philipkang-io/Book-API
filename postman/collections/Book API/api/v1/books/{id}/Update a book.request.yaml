@@ -1,0 +1,21 @@
+schemaVersion: "3.0"
+name: Update a book
+type: http
+url: http://{{baseUrl}}/api/v1/books/:id
+method: PUT
+headers:
+  Content-Type: application/json
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: "4"
+    description: Book ID
+body:
+  type: text
+  content: |-
+    {
+      "title": "Dune",
+      "author": "Frank Herbert",
+      "year": 1965
+    }
+order: 2000

@@ -1,0 +1,15 @@
+schemaVersion: "3.0"
+name: Delete a book
+type: http
+url: http://{{baseUrl}}/api/v1/books/:id
+method: DELETE
+headers:
+  Accept: application/json
+pathVariables:
+  - key: id
+    value: "4"
+    description: Book ID
+body:
+  type: text
+  content: ""
+order: 3000

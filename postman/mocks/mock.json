@@ -1,0 +1,13 @@
+{
+  "id": "bcf1be64-44d7-4540-993f-cd58ffa91d6f",
+  "version": 1,
+  "name": "Book API Mock",
+  "protocol": "http",
+  "port": 4500,
+  "mockSrc": "./mock.js",
+  "autoRestartOnChange": true,
+  "logging": {
+    "level": "verbose",
+    "showBody": true
+  }
+}

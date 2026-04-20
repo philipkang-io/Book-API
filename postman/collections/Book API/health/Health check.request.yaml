@@ -1,0 +1,11 @@
+schemaVersion: "3.0"
+type: http
+url: http://{{baseUrl}}/health
+method: GET
+headers:
+  Accept: application/json
+body:
+  type: text
+  content: ""
+examples: ./.resources/Health check.resources/examples
+order: 1000
